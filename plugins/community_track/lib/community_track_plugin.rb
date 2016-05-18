@@ -12,6 +12,10 @@ class CommunityTrackPlugin < Noosfero::Plugin
     true
   end
 
+  def js_files
+    ['script.js']
+  end
+
   def content_types
     if context.kind_of?(CmsController) && context.respond_to?(:params) && context.params
       types = []

@@ -4,10 +4,11 @@ class CommunityTrackPlugin::TrackListBlock < Block
 
   settings_items :limit, :type => :integer, :default => 3
   settings_items :more_another_page, :type => :boolean, :default => false
+  settings_items :show_step_content, :type => :boolean, :default => false
   settings_items :category_ids, :type => Array, :default => []
   settings_items :order, :type => :string, :default => 'hits'
 
-  attr_accessible :more_another_page, :category_ids, :order
+  attr_accessible :more_another_page, :category_ids, :order, :show_step_content
 
   def self.description
     _('Track List')

@@ -213,7 +213,7 @@
   margin-top: 5px;
 }
 
-#article .step_list .step .tool_icon, 
+#article .step_list .step .tool_icon,
 .tool_icon {
   color: #888;
   background-color: transparent;
@@ -264,4 +264,24 @@
 
 .step .legend {
   float: right;
+}
+
+.step-list {
+  list-style: none;
+}
+
+.step-list li {
+  display: inline;
+}
+
+.track-cards-steps span.name {
+  cursor: pointer;
+}
+
+.track-cards-content {
+  display: none;
+}
+
+.track-cards-steps-url {
+  display: none;
 }

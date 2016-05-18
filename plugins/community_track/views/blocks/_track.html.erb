@@ -2,25 +2,62 @@
 <% extend CommunityTrackPlugin::StepHelper %>
 <div class="item <%= category_class(track) %>">
   <div class="track_content">
-    <div class="lead">
-      <h3><%= link_to track.name, track.url %></h3>
-      <div class="content">
+  <div class="item_card <%= category_class(track) %>">
+    <a href="<%= url_for track.url %>">
+    <div class="track_content">
+      <div class="title" style="<%= track_color_style(track) %>">
+        <%= track.category_name %>
+      </div>
+      <div class="image">
+        <%= image_tag track.image.public_filename if track.image %>
+      </div>
+      <div class="name" style="<%= track_name_color_style(track) %>">
+        <%= track.name %>
+      </div>
+      <div class="lead">
         <%= track.lead %>
       </div>
     </div>
-    <div class="steps">
-      <h3><%= _("Steps") %></h3>
-      <% track.steps.each do |step| %>
-        <%= link_to_step(step) do %>
-          <span class="step <%= block.status_class(step) %>">
-            <span class="position"><%= step.position %></span>
-            <span class="legend"><%= status_description(step) %></span>
-            <span class="tool_icon button with-text icon-new icon-new<%= step.tool_class.icon_name if step.tool_class %>"></span>
-            <span class="name"><%= step.name %></span>
-          </span>
-        <% end %>
-      <% end %>
+    <div class="track_stats">
+      <div class="comments">
+        <span class="counter"><%= "#{track.comments_count}" %></span>
+        <span class="label"><%= c_('comments') %></span>
+      </div>
+      <div class="hits">
+        <span class="counter"><%= "#{track.hits}" %></span>
+        <span class="label"><%= _('hits') %></span>
+      </div>
     </div>
-  </div>
+    </a>
+</div>
+<div class="steps">
+  <h3><%= _("Steps") %></h3>
+  <ul class='step-list'>
+  <% track.steps.each do |step| %>
+    <li>
+      <div class='track-cards-steps' data-show-content='<%= block.show_step_content %>'>
+        <%= link_to_step(step, :class=>'track-cards-steps-url') %>
+        <span class="step <%= block.status_class(step) %>">
+          <span class="position"><%= step.position %></span>
+          <span class="legend"><%= status_description(step) %></span>
+          <span class="tool_icon button with-text icon-new icon-new<%= step.tool_class.icon_name if step.tool_class %>"></span>
+          <span class="name">
+            <%= step.name %>
+          </span>
+        </span>
+      </div>
+      <div class="track-cards-content">
+        <% if block.show_step_content %>
+            <% if not step.children.empty? %>
+            <%= step.children.first.author.name %>
+            <p><%= step.children.first.name %></p>
+            <p><%= step.children.first.body.html_safe %></p>
+            <% end %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+</div>
 </div>
 <br style="clear: both;"/>
