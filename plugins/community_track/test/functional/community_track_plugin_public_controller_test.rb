@@ -25,13 +25,13 @@ class CommunityTrackPluginPublicControllerTest < ActionController::TestCase
   should 'display tracks with page size' do
     20.times { |i| create_track("track#{i}", @community) }
     xhr :get, :view_tracks, :id => @block.id, :page => 1, :per_page => 10
-    assert_equal 10, @response.body.scan(/item/).size
+    assert_equal 10, @response.body.scan(/item /).size
   end
 
   should 'default page size is the block limit' do
     20.times { |i| create_track("track#{i}", @community) }
     xhr :get, :view_tracks, :id => @block.id, :page => 1
-    assert_equal @block.limit, @response.body.scan(/item/).size
+    assert_equal @block.limit, @response.body.scan(/item /).size
   end
 
   should 'display page for all tracks' do

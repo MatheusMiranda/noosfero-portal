@@ -30,13 +30,13 @@
     </div>
     </a>
 </div>
-<div class="steps">
+<div class="steps" id="step-test">
   <h3><%= _("Steps") %></h3>
-  <ul class='step-list'>
+	<ul class='step-list'>
   <% track.steps.each do |step| %>
     <li>
       <div class='track-cards-steps' data-show-content='<%= block.show_step_content %>'>
-        <%= link_to_step(step, :class=>'track-cards-steps-url') %>
+        <%= link_to_step(step, :class=>'track-cards-steps-url')  %>
         <span class="step <%= block.status_class(step) %>">
           <span class="position"><%= step.position %></span>
           <span class="legend"><%= status_description(step) %></span>
@@ -46,13 +46,19 @@
           </span>
         </span>
       </div>
-      <div class="track-cards-content">
-        <% if block.show_step_content %>
-            <% if not step.children.empty? %>
-            <%= step.children.first.author.name %>
-            <p><%= step.children.first.name %></p>
-            <p><%= step.children.first.body.html_safe %></p>
-            <% end %>
+			<div class="track-cards-content">
+				<% if step.children.first.present? %>				
+           <p>
+             <%= ("%{date}, by %{author}") % {:author => step.children.first.author.name,
+                  :date => show_time(step.children.first.updated_at)} %>
+           </p>
+           <p class='title' id='step-title'><%= step.children.first.name %></p>
+           <p><%= step.children.first.body.html_safe %></p>
+           <p class='read-more'>
+           <%= link_to_step(step) do %>
+             <%= _("Read more") %>
+           <% end %>
+           </p>
         <% end %>
       </div>
     </li>

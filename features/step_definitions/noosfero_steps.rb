@@ -114,6 +114,7 @@ Given /^the following (articles|events|blogs|folders|forums|galleries|uploaded f
     owner_identifier = item.delete("owner")
     parent = item.delete("parent")
     owner = Profile[owner_identifier]
+    author = Profile[item.delete("author")]
     home = item.delete("homepage")
     language = item.delete("language")
     category = item.delete("category")
@@ -129,8 +130,9 @@ Given /^the following (articles|events|blogs|folders|forums|galleries|uploaded f
     item.merge!(
       :profile => owner,
       :language => language,
-      :translation_of_id => translation_of_id)
-    if !filename.blank?
+      :translation_of_id => translation_of_id,
+    	:author => author)
+		if !filename.blank?
       item.merge!(:uploaded_data => fixture_file_upload("/files/#{filename}", 'binary/octet-stream'))
     end
     result = klass.new(item)

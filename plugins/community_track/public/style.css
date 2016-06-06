@@ -28,7 +28,7 @@
 }
 
 .track_list .item .step {
-  padding: 8px 5px;
+  padding: 14px 5px;
 }
 
 #article .step a {
@@ -37,12 +37,13 @@
 
 .track_list .item .track_content .lead {
   float: left;
-  width: 50%;
+  width: 100%;
 }
 
 .track_list .item .track_content .steps {
   float: right;
-  width: 50%;
+  width: 61%;
+  margin-right: 28px;
 }
 
 .track_list .item {
@@ -284,4 +285,14 @@
 
 .track-cards-steps-url {
   display: none;
+}
+
+#step-test h3 {
+  font-size: 16px;
+  margin-left: 40px;
+  margin-top: 4px;
+}
+
+#step-title {
+  font-size: 14px;
 }
